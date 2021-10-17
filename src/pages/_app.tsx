@@ -1,10 +1,23 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import type { AppProps } from "next/app";
+import Head from "next/head";
 
-function App({ Component, pageProps }: AppProps) {
+import { AppPropsWithLayout } from "../@types/types";
+
+function App({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
+  const defaultTitle = "Davi Ribeiro";
+
+  const getTitle =
+    `${defaultTitle} | ${Component.pageTitle} ` ?? `${defaultTitle}`;
+
   return (
     <ChakraProvider>
-      <Component {...pageProps} />
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <title>{getTitle}</title>
+      </Head>
+      {getLayout(<Component {...pageProps} />)}
     </ChakraProvider>
   );
 }

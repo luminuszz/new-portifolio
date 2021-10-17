@@ -34,5 +34,5 @@ yarn-error.log*
 .vercel
 
 # idas
-./.idea
+.idea
 ./.vscode
